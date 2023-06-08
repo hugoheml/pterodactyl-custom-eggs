@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-08T22:16:47+02:00",
+    "exported_at": "2023-06-08T22:31:31+02:00",
     "name": "GitHub Actions Runner",
     "author": "hugoheml@users.noreply.github.com",
     "description": "A simple Pterodactyl Egg that lets you host a GitHub Action Runners",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "# Install curl\r\napt update\r\napt install -y curl tar\r\n\r\n# Allow sudo run\r\nexport RUNNER_ALLOW_RUNASROOT=1\r\n\r\n# Go to \/mnt\/server folder\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Get latest Github Action Runner last release\r\necho \"Fetch last GitHub Action Runner\"\r\nRUNNER_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/actions\/runner\/releases\/latest\" | grep \"tag_name\" | cut -d '\"' -f 4 | sed 's\/^v\/\/')\r\n\r\n# Download Github Action Runner release\r\necho \"Downloading action runner (v$RUNNER_VERSION)\"\r\ncurl -o actions-runner.tar.gz -L https:\/\/github.com\/actions\/runner\/releases\/download\/v$RUNNER_VERSION\/actions-runner-linux-x64-$RUNNER_VERSION.tar.gz\r\n\r\n# Extract Github Action Runner files\r\necho \"Extract action runner files\"\r\ntar xzf .\/actions-runner.tar.gz\r\n\r\n# Install GitHub Actions dependencies\r\necho \"Download Github Action Runner dependencies\"\r\n.\/bin\/installdependencies.sh\r\n\r\n# Configure Github Action Runner\r\necho \"Confgiure Github Action Runner\"\r\n.\/config.sh --url https:\/\/github.com\/${GITHUB_CATEGORY} --token ${GITHUB_ACTION_TOKEN} --name ${GITHUB_ACTION_RUNNER_TOKEN} --unattended\r\n\r\necho -e \"Installation complete\"\r\nexit 0",
+            "script": "# Install curl\r\napt update\r\napt install -y curl tar\r\n\r\n# Allow sudo run\r\nexport RUNNER_ALLOW_RUNASROOT=1\r\n\r\n# Go to \/mnt\/server folder\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Get latest Github Action Runner last release\r\necho \"Fetch last GitHub Action Runner\"\r\nRUNNER_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/actions\/runner\/releases\/latest\" | grep \"tag_name\" | cut -d '\"' -f 4 | sed 's\/^v\/\/')\r\n\r\n# Download Github Action Runner release\r\necho \"Downloading action runner (v$RUNNER_VERSION)\"\r\ncurl -o actions-runner.tar.gz -L https:\/\/github.com\/actions\/runner\/releases\/download\/v$RUNNER_VERSION\/actions-runner-linux-x64-$RUNNER_VERSION.tar.gz\r\n\r\n# Extract Github Action Runner files\r\necho \"Extract action runner files\"\r\ntar xzf .\/actions-runner.tar.gz\r\n\r\n# Install GitHub Actions dependencies\r\necho \"Download Github Action Runner dependencies\"\r\n.\/bin\/installdependencies.sh\r\n\r\n# Configure Github Action Runner\r\necho \"Confgiure Github Action Runner\"\r\n.\/config.sh --url https:\/\/github.com\/${GITHUB_CATEGORY} --token ${GITHUB_ACTION_RUNNER_TOKEN} --name ${GITHUB_ACTION_RUNNER_NAME} --unattended\r\n\r\necho -e \"Installation complete\"\r\nexit 0",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "bash"
         }
@@ -31,7 +31,7 @@
         {
             "name": "GITHUB_ACTION_RUNNER_TOKEN",
             "description": "GitHub Action Token (you can find in the installation guide with the --token value)",
-            "env_variable": "GITHUB_ACTION_TOKEN",
+            "env_variable": "GITHUB_ACTION_RUNNER_TOKEN",
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
@@ -41,7 +41,7 @@
         {
             "name": "GITHUB_CATEGORY",
             "description": "The GitHub <organisation>\/<repository (optionnal) where you want to add a custom runner",
-            "env_variable": "GITHUB_USERNAME",
+            "env_variable": "GITHUB_CATEGORY",
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
