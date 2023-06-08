@@ -1,0 +1,43 @@
+name: "Bug Report"
+description: "Report a bug or a problem."
+labels: [
+  "bug"
+]
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: Please enter an explicit description of your issue
+      placeholder: Short and explicit description of your incident...
+    validations:
+      required: true
+  - type: textarea
+    id: except-behaviour
+    attributes:
+      label: "Expected behaviour"
+      description: "Optional, the expected behaviour"
+      placeholder: "The expected behaviour"
+    validations:
+      required: false
+  - type: textarea
+    id: reprod
+    attributes:
+      label: "Reproduction steps"
+      description: Please enter an explicit description of your issue
+      value: |
+        1. 
+        2. 
+        3. 
+        4. 
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: "Screenshots"
+      description: If applicable, add screenshots to help explain your problem.
+    validations:
+      required: false
